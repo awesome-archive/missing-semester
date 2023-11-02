@@ -1,4 +1,6 @@
 /* Copyright (c) 2017 Anish Athalye */
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro);
 
 /* Basic styling */
 
@@ -10,14 +12,17 @@
 }
 
 html {
-  font-size: 14px;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+/*  font-size: 14px;
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 14pt;
   line-height: 1.5;
 }
 
 @media(min-width: 480px) {
   html {
-    font-size: 16px;
+    /*font-size: 16px;*/
+    font-size: 14pt;
   }
 }
 
@@ -25,11 +30,13 @@ body {
   margin: 0;
   color: #000;
   background-color: #fff;
+  overflow-y: scroll;
 }
 
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1rem;
   font-weight: bold;
+  /*text-decoration: underline;*/
   line-height: 1.25;
   font-size: 1rem;
 }
@@ -62,6 +69,10 @@ ul {
   padding-left: 1rem;
 }
 
+ol {
+  margin-left: 1rem;
+}
+
 li > ul {
   padding-left: 2rem;
 }
@@ -84,6 +95,10 @@ ul li:before {
   margin-left: -1rem;
 }
 
+ul.double-spaced li {
+  margin-top: 1rem;
+}
+
 pre, code {
   font-family: "Source Code Pro", "Menlo", "DejaVu Sans Mono", "Lucida Console", monospace;
 }
@@ -92,33 +107,35 @@ code {
   background-color: rgba(27,31,35,.05);
   border-radius: 3px;
   padding: 0 0.2rem;
-  font-size: 0.9em;
+  /*font-size: 0.9em;*/
+  font-size: 12pt;
 }
 
 pre {
   color: #000;
   margin: 1rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.7rem;
   border: 1px dashed #444;
-  word-wrap: break-word;
-  white-space: pre-wrap;
-  font-size: .8rem;
+  /*font-size: .8rem;*/
+  font-size: 11pt;
+  overflow-x: auto;
 }
 
 pre code {
   color: inherit;
   background: none;
   font-size: 100%;
+  padding: 0;
 }
 
 a {
-  color: #006400;
+  color: #54008c;
   text-decoration: underline;
 }
 
 a:hover {
   color: #fff;
-  background-color: #006400;
+  background-color: #54008c;
 }
 
 img, video {
@@ -170,6 +187,15 @@ hr {
   text-align: center;
 }
 
+.gap {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+.accent {
+  color: #8c0038;
+}
+
 .youtube-wrapper {
   position: relative;
   height: 0;
@@ -182,22 +208,28 @@ hr {
   left: 0;
   width: 100%;
   height: 100%;
+  border: 0;
 }
 
 /* Elements */
 
 #content {
-  max-width: 40rem;
+  max-width: 35rem;
   margin: auto;
   margin-bottom: 2rem;
   padding: 1rem 1rem 0 1rem;
+}
+
+.demo {
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 #nav-bg {
   margin: 0;
   padding: 0.25rem 1rem;
   font-family: "Source Code Pro", "Menlo", "DejaVu Sans Mono", "Lucida Console", monospace;
-  background: #006400;
+  background: #54008c;
   color: #fff;
 }
 
@@ -218,7 +250,7 @@ hr {
 }
 
 a#logo {
-  color: #0f0;
+  color: #f2deff;
 }
 
 a:hover#logo {
@@ -280,11 +312,69 @@ input[type=checkbox]:checked ~ .menu-label:after {
     text-align: initial;
   }
 
+  input[type=checkbox]:checked ~ .trigger {
+    display: inline;
+  }
+
   .nav-link {
     display: initial;
   }
 
   .nav-link:before {
     content: "| ";
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+    body {
+        background-color: #303030;
+        color: #ddd
+    }
+
+    a {
+      color: #66D9EF;
+      /*color: #A6E22E;*/
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #000;
+      background-color: #66D9EF;
+      text-decoration: none;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        color: #eee;
+      }
+
+    #nav-bg, a#logo, #top-nav a {
+      background-color: #A6E22E;
+      color: #202020;
+    }
+
+    a:hover > code  {
+        background-color: #66D9EF;
+    }
+
+    .accent {
+        color: #F92672;
+    }
+}
+
+@media print {
+  #nav-bg, #logo, #top-nav { display: none; }
+  h1.title ~ p.center.gap.accent { display: none; }
+  .youtube-wrapper { display: none; }
+  html { font-size: 1em; font-family: sans-serif; }
+  body { background: none; }
+  #content { max-width: none; }
+  h1.title { text-align: center; }
+  h1, h2, h3, h4, h5, h6 { break-after: avoid-page; page-break-after: avoid; }
+  #content hr:last-of-type { display: none; }
+  #content pre { break-inside: avoid-page; page-break-inside: avoid; white-space: pre-wrap; }
+  #content div.small:last-of-type { display: none; }
+  a[href^="https://"]::after, a[href^="http://"]::after {
+    content: "("attr(href)")"; font-family: monospace; margin: 0 .25em;
   }
 }
